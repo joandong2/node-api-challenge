@@ -52,6 +52,24 @@ router.post("/", (req, res) => {
         });
 });
 
+router.put("/:id", (req, res) => {
+    // do your magic!
+    if (!req.body) {
+        return res.status(400).json({
+            message: "Missing post data",
+        });
+    }
+
+    actions
+        .update(req.params.id, req.body)
+        .then((action) => {
+            res.status(200).json(action);
+        })
+        .catch((error) => {
+            console.log("Err: " + error);
+        });
+});
+
 router.delete("/:id", (req, res) => {
     // do your magic!
     actions
